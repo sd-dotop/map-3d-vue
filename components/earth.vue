@@ -22,7 +22,7 @@ const props = defineProps({
 const earthRef = ref(null)
 let earth
 cesiumDOM.onload = () => {
-  script.onload = () => {
+  setTimeout(() => {
     XE.ready().then(() => {
       earth = new XE.Earth(earthRef.value)
       earth.interaction.picking.enabled = true
@@ -73,6 +73,6 @@ cesiumDOM.onload = () => {
       }
       XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
-  }
+  }, 1000)
 }
 </script>

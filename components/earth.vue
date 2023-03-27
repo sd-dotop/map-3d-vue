@@ -25,21 +25,38 @@ cesiumDOM.onload = () => {
   setTimeout(() => {
     XE.ready().then(() => {
       earth = new XE.Earth(earthRef.value)
+      earth.interaction.picking.enabled = true
       earth.sceneTree.root = {
         children: [
           {
-            czmObject: {
-              name: '默认离线影像',
-              xbsjType: 'Imagery',
-              xbsjImageryProvider: {
-                createTileMapServiceImageryProvider: {
-                  url: XE.HTML.cesiumDir + 'Assets/Textures/NaturalEarthII',
-                  fileExtension: 'jpg',
+            expand: true,
+            title: '地图',
+            children: [
+              {
+                czmObject: {
+                  name: '默认离线影像',
+                  xbsjType: 'Imagery',
+                  xbsjImageryProvider: {
+                    XbsjImageryProvider: {
+                      url: '//t6.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=835402675b4eef1d10ff69553d33801f',
+                    },
+                  },
                 },
-                type: 'createTileMapServiceImageryProvider',
               },
-            },
+              {
+                czmObject: {
+                  name: '默认离线影像',
+                  xbsjType: 'Imagery',
+                  xbsjImageryProvider: {
+                    XbsjImageryProvider: {
+                      url: '//t6.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=835402675b4eef1d10ff69553d33801f',
+                    },
+                  },
+                },
+              },
+            ],
           },
+
           {
             czmObject: {
               name: '三维瓦片数据', // 可以不填写
@@ -53,6 +70,9 @@ cesiumDOM.onload = () => {
         ],
       }
       const tileset = earth.sceneTree.root.children[1].czmObject
+      tileset.onclick = (pickedObject) => {
+        console.log(pickedObject)
+      }
       XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
   }, 1000)

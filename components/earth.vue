@@ -63,7 +63,7 @@ cesiumDOM.onload = () => {
               xbsjType: 'Tileset', // 必填项
               url: props.url, // 必填项
 
-              xbsjUseOriginTransform: false, // 可以不填写
+              xbsjUseOriginTransform: true, // 可以不填写
               skipLevelOfDetail: false,
             },
           },

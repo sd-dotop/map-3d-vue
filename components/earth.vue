@@ -22,7 +22,7 @@ const props = defineProps({
 const earthRef = ref(null)
 let earth
 cesiumDOM.onload = () => {
-  setTimeout(() => {
+  script.onload = () => {
     XE.ready().then(() => {
       earth = new XE.Earth(earthRef.value)
       earth.interaction.picking.enabled = true
@@ -62,9 +62,7 @@ cesiumDOM.onload = () => {
               name: '三维瓦片数据', // 可以不填写
               xbsjType: 'Tileset', // 必填项
               url: props.url, // 必填项
-
-              xbsjUseOriginTransform: true, // 可以不填写
-              skipLevelOfDetail: false,
+              xbsjUseOriginTransform: true,
             },
           },
         ],
@@ -75,6 +73,6 @@ cesiumDOM.onload = () => {
       }
       XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
-  }, 1000)
+  }
 }
 </script>

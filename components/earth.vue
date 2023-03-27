@@ -5,7 +5,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-
+import '../earthSDK/XbsjCesium/Widgets/widgets.css'
 const cesiumUrl = new URL('../earthSDK/XbsjCesium/Cesium.js', import.meta.url).href
 const earthSDKUrl = new URL('../earthSDK/XbsjEarth/XbsjEarth.js', import.meta.url).href
 const cesiumDOM = document.createElement('script')
@@ -14,6 +14,11 @@ const script = document.createElement('script')
 script.src = earthSDKUrl
 document.body.appendChild(cesiumDOM)
 document.body.appendChild(script)
+
+const props = defineProps({
+  url: String,
+})
+
 const earthRef = ref(null)
 let earth
 cesiumDOM.onload = () => {
@@ -35,8 +40,20 @@ cesiumDOM.onload = () => {
               },
             },
           },
+          {
+            czmObject: {
+              name: '三维瓦片数据', // 可以不填写
+              xbsjType: 'Tileset', // 必填项
+              url: props.url, // 必填项
+
+              xbsjUseOriginTransform: false, // 可以不填写
+              skipLevelOfDetail: false,
+            },
+          },
         ],
       }
+      const tileset = earth.sceneTree.root.children[1].czmObject
+      XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
   }, 1000)
 }

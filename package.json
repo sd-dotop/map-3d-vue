@@ -1,0 +1,15 @@
+{
+    "name": "map-3d",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "3dmap use earthSDK for vue3 and vite",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "mengxi",
+    "license": "ISC",
+    "dependencies": {
+        "cesium": "^1.103.0"
+    }
+}

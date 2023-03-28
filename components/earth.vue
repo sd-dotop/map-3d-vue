@@ -19,6 +19,8 @@ const props = defineProps({
   url: String,
 })
 
+const emit = defineEmits(['obj-click'])
+
 const earthRef = ref(null)
 let earth
 cesiumDOM.onload = () => {
@@ -69,10 +71,14 @@ cesiumDOM.onload = () => {
       }
       const tileset = earth.sceneTree.root.children[1].czmObject
       tileset.onclick = (pickedObject) => {
-        console.log(pickedObject)
+        emit('obj-click', pickedObject)
       }
       XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
   }, 1000)
 }
+
+defineExpose({
+  earth,
+})
 </script>

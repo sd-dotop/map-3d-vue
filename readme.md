@@ -2,6 +2,22 @@
 
 使用[earthSDK](http://www.earthsdk.com/)
 
+## 安装
+
+```terminal
+pnpm install git+http://122.14.216.105:8090/mengxi/map-3d-vue3.git
+```
+
+## 使用
+
+```javascript
+// main.js
+
+import earth from 'map-3d'
+
+app.use(earth)
+```
+
 ## earth-view 组件
 
 ```html

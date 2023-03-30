@@ -15,8 +15,6 @@ script.src = earthSDKUrl
 document.body.appendChild(cesiumDOM)
 document.body.appendChild(script)
 
-const XE = window.XE
-
 const props = defineProps({
   url: String,
   objs: Array,

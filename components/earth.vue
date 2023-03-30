@@ -59,23 +59,10 @@ cesiumDOM.onload = () => {
               },
             ],
           },
-
-          //   {
-          //     czmObject: {
-          //       name: '三维瓦片数据', // 可以不填写
-          //       xbsjType: 'Tileset', // 必填项
-          //       url: props.url, // 必填项
-          //       xbsjUseOriginTransform: true,
-          //     },
-          //   },
         ],
       }
-      console.log(props.objs)
-      //   earth.sceneTree.root.children = earth.sceneTree.root.children.concat(props.objs)
       props.objs.forEach((obj) => {
         earth.sceneTree.root.children.push(obj)
-        console.log(obj)
-        console.log(earth.sceneTree.$refs[obj.ref].czmObject)
         XE.MVVM.watch(earth.sceneTree.$refs[obj.ref].czmObject, 'ready', (ready) => {
           if (ready) {
             emit('tileset-ready', { origin: obj, tileset: earth.sceneTree.$refs[obj.ref].czmObject })
@@ -83,11 +70,6 @@ cesiumDOM.onload = () => {
         })
       })
       emit('earth-ready', { XE, earth, sceneTree: earth.sceneTree })
-      //   const tileset = earth.sceneTree.root.children[1].czmObject
-      //   tileset.onclick = (pickedObject) => {
-      //     emit('obj-click', pickedObject)
-      //   }
-      //   XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
   }, 1000)
 }

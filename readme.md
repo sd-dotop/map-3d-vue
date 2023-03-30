@@ -26,24 +26,18 @@ app.use(earth)
 
 #### 属性
 
-| 属性 | 类型   | 描述                       |
-| ---- | ------ | -------------------------- |
-| url  | String | 三维缓存地址, tileset.json |
-| objs | Array  | czmObject 数组             |
+| 属性 | 类型  | 描述           |
+| ---- | ----- | -------------- |
+| objs | Array | czmObject 数组 |
 
 #### 事件
 
-| 事件      | 返回值           | 描述                           |
-| --------- | ---------------- | ------------------------------ |
-| obj-click | 3dTileSetFeature | 模型部件点击事件，返回值为模型 |
+| 事件          | 返回值                 | 描述                                        |
+| ------------- | ---------------------- | ------------------------------------------- |
+| earth-ready   | {XE, earth, sceneTree} | 返回值对象包含 XE， earth 实例， 场景树实例 |
+| tileset-ready | {origin, tileset}      | 返回值包含原始数据对象， 三维场景对象       |
 
-#### expose
-
-| expose | 描述         |
-| ------ | ------------ |
-| earth  | 三维地球实例 |
-
-### czmObject 例子
+#### czmObject 例子
 
 ```javascript
 {
@@ -57,4 +51,40 @@ app.use(earth)
     },
     "ref": 'tileset' // ref需要自己取一个名字 用来获取czmObject实例
 },
+```
+
+#### 示例
+
+```html
+<earth-view :objs="objs" @tileset-ready="tilesetReady" @earth-ready="earthReady" />
+```
+
+```javascript
+<script setup>
+    const objs = [
+        {
+            czmObject: {
+                name: '三维瓦片数据', // 可以不填写
+                xbsjType: 'Tileset', // 必填项
+                url: './c/ljt_cache/tileset.json', // 必填项
+                xbsjUseOriginTransform: true,
+            },
+            ref: 'tileset',
+        },
+    ]
+
+    function tilesetReady({ origin, tileset }) {
+        console.log(origin)
+        tileset.flyTo()
+        tileset.onclick = (pickedObj) => {
+            console.log(pickedObj)
+        }
+    }
+
+    function earthReady({XE, earth sceneTree}) {
+        console.log(XE)
+        console.log(earth)
+        console.log(sceneTree)
+    }
+</script>
 ```

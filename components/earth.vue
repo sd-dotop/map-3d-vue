@@ -72,8 +72,8 @@ cesiumDOM.onload = () => {
           //   },
         ],
       }
-      //   earth.sceneTree.root.children = earth.sceneTree.root.children.concat(objs)
-      objs.forEach((obj) => {
+      earth.sceneTree.root.children = earth.sceneTree.root.children.concat(props.objs)
+      props.objs.forEach((obj) => {
         earth.sceneTree.root.children.push(obj)
         console.log(obj)
         console.log(earth.sceneTree.$refs[obj.ref].czmObject)

@@ -29,6 +29,7 @@ app.use(earth)
 | 属性 | 类型   | 描述                       |
 | ---- | ------ | -------------------------- |
 | url  | String | 三维缓存地址, tileset.json |
+| objs | Array  | czmObject 数组             |
 
 #### 事件
 
@@ -41,3 +42,19 @@ app.use(earth)
 | expose | 描述         |
 | ------ | ------------ |
 | earth  | 三维地球实例 |
+
+### czmObject 例子
+
+```javascript
+{
+    "czmObject": {
+        "xbsjType": "Tileset", // 三维缓存的type就是Tileset
+        "name": "三维瓦片1x", // name自己取一个
+        "url": "../assets/dayanta/tileset.json", // 三维缓存的url地址
+        "xbsjClippingPlanes": {},
+        "xbsjUseOriginTransform": true, // 是否启用原先的状态
+        "skipLevelOfDetail": false
+    },
+    "ref": 'tileset' // ref需要自己取一个名字 用来获取czmObject实例
+},
+```

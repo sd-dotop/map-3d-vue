@@ -15,11 +15,14 @@ script.src = earthSDKUrl
 document.body.appendChild(cesiumDOM)
 document.body.appendChild(script)
 
+const XE = window.XE
+
 const props = defineProps({
   url: String,
+  objs: Array,
 })
 
-const emit = defineEmits(['obj-click'])
+const emit = defineEmits(['earth-ready', 'tileset-ready'])
 
 const earthRef = ref(null)
 let earth
@@ -59,26 +62,37 @@ cesiumDOM.onload = () => {
             ],
           },
 
-          {
-            czmObject: {
-              name: '三维瓦片数据', // 可以不填写
-              xbsjType: 'Tileset', // 必填项
-              url: props.url, // 必填项
-              xbsjUseOriginTransform: true,
-            },
-          },
+          //   {
+          //     czmObject: {
+          //       name: '三维瓦片数据', // 可以不填写
+          //       xbsjType: 'Tileset', // 必填项
+          //       url: props.url, // 必填项
+          //       xbsjUseOriginTransform: true,
+          //     },
+          //   },
         ],
       }
-      const tileset = earth.sceneTree.root.children[1].czmObject
-      tileset.onclick = (pickedObject) => {
-        emit('obj-click', pickedObject)
-      }
-      XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
+      earth.sceneTree.root.children = earth.sceneTree.root.children.concat(objs)
+      objs.forEach((obj) => {
+        XE.MVVM.watch(earth.sceneTree.$refs[obj.ref].czmObject, 'ready', (ready) => {
+          if (ready) {
+            emit('tileset-ready', { origin: obj, tileset: earth.sceneTree.$refs[obj.ref].czmObject })
+          }
+        })
+      })
+      emit('earth-ready', { XE, earth, sceneTree: earth.sceneTree })
+      //   const tileset = earth.sceneTree.root.children[1].czmObject
+      //   tileset.onclick = (pickedObject) => {
+      //     emit('obj-click', pickedObject)
+      //   }
+      //   XE.MVVM.watch(tileset, 'ready', (ready) => ready && tileset.flyTo())
     })
   }, 1000)
 }
 
 defineExpose({
   earth,
+  sceneTree: earth.sceneTree,
+  XE,
 })
 </script>

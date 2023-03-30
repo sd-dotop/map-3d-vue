@@ -72,8 +72,9 @@ cesiumDOM.onload = () => {
           //   },
         ],
       }
-      earth.sceneTree.root.children = earth.sceneTree.root.children.concat(objs)
+      //   earth.sceneTree.root.children = earth.sceneTree.root.children.concat(objs)
       objs.forEach((obj) => {
+        earth.sceneTree.root.children.push(obj)
         XE.MVVM.watch(earth.sceneTree.$refs[obj.ref].czmObject, 'ready', (ready) => {
           if (ready) {
             emit('tileset-ready', { origin: obj, tileset: earth.sceneTree.$refs[obj.ref].czmObject })

@@ -89,10 +89,4 @@ cesiumDOM.onload = () => {
     })
   }, 1000)
 }
-
-defineExpose({
-  earth,
-  sceneTree: earth.sceneTree,
-  XE,
-})
 </script>

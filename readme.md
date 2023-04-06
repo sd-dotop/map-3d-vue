@@ -78,6 +78,15 @@ app.use(earth)
         tileset.flyTo()
         tileset.onclick = (pickedObj) => {
             console.log(pickedObj)
+
+            // 获取模型属性
+            let names = pickedObj.getPropertyNames()
+            let objs = {}
+            for (let index in names) {
+                let key = names[index]
+                objs[key] = pickedObj.getProperty(key)
+            }
+            console.log(objs)
         }
     }
 

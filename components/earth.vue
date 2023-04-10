@@ -36,9 +36,9 @@ const emit = defineEmits(['earth-ready', 'tileset-ready', 'ui-ready'])
 
 const earthRef = ref(null)
 
-cesiumDOM.onload(() => {
-  script.onload(() => {
-    uiDOM.onload(() => {
+cesiumDOM.onload = () => {
+  script.onload = () => {
+    uiDOM.onload = () => {
       XbsjEarthUI.create('_earthWrapper').then((earthUI) => {
         if (props.ui) {
           //隐藏主工具栏
@@ -91,7 +91,7 @@ cesiumDOM.onload(() => {
         })
         emit('earth-ready', { XE, earth, sceneTree: earth.sceneTree })
       })
-    })
-  })
-})
+    }
+  }
+}
 </script>

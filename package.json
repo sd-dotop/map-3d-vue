@@ -1,6 +1,6 @@
 {
     "name": "map-3d",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "type": "module",
     "description": "3dmap use earthSDK for vue3 and vite",
     "main": "index.js",

@@ -26,9 +26,10 @@ app.use(earth)
 
 #### 属性
 
-| 属性 | 类型  | 描述           |
-| ---- | ----- | -------------- |
-| objs | Array | czmObject 数组 |
+| 属性 | 类型    | 描述             |
+| ---- | ------- | ---------------- |
+| objs | Array   | czmObject 数组   |
+| ui   | Boolean | 是否展示 UI 界面 |
 
 #### 事件
 
@@ -36,6 +37,7 @@ app.use(earth)
 | ------------- | ---------------------- | ------------------------------------------- |
 | earth-ready   | {XE, earth, sceneTree} | 返回值对象包含 XE， earth 实例， 场景树实例 |
 | tileset-ready | {origin, tileset}      | 返回值包含原始数据对象， 三维场景对象       |
+| ui-ready      | earthUI                | 返回值为 earthUI 对象                       |
 
 #### czmObject 例子
 
@@ -56,7 +58,7 @@ app.use(earth)
 #### 示例
 
 ```html
-<earth-view :objs="objs" @tileset-ready="tilesetReady" @earth-ready="earthReady" />
+<earth-view :objs="objs" :ui="true" @tileset-ready="tilesetReady" @earth-ready="earthReady" @ui-ready="uiReady" />
 ```
 
 ```javascript
@@ -94,6 +96,10 @@ app.use(earth)
         console.log(XE)
         console.log(earth)
         console.log(sceneTree)
+    }
+
+    function uiReady(earthUI) {
+        console.log(earthUI)
     }
 </script>
 ```

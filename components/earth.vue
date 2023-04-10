@@ -20,7 +20,7 @@ document.body.appendChild(cesiumDOM)
 document.body.appendChild(script)
 
 const uiDOM = document.createElement('script')
-script.src = earthUiUrl
+uiDOM.src = earthUiUrl
 
 document.body.appendChild(uiDOM)
 
@@ -90,6 +90,6 @@ cesiumDOM.onload = () => {
       })
       emit('earth-ready', { XE, earth, sceneTree: earth.sceneTree })
     })
-  }, 1000)
+  }, 2000)
 }
 </script>

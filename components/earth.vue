@@ -47,7 +47,7 @@ cesiumDOM.onload = () => {
         emit('ui-ready', earthUI)
       }
       let { earth } = earthUI
-      earth.interaction.picking.enabled = true
+      //   earth.interaction.picking.enabled = true
       earth.sceneTree.root = {
         children: [
           {

@@ -70,11 +70,13 @@ loadJS(cesiumUrl, () => {
         }
         props.objs.forEach((obj) => {
           earth.sceneTree.root.children.push(obj)
-          XE.MVVM.watch(earth.sceneTree.$refs[obj.ref].czmObject, 'ready', (ready) => {
-            if (ready) {
-              emit('tileset-ready', { origin: obj, tileset: earth.sceneTree.$refs[obj.ref].czmObject })
-            }
-          })
+          if (obj.ref) {
+            XE.MVVM.watch(earth.sceneTree.$refs[obj.ref].czmObject, 'ready', (ready) => {
+              if (ready) {
+                emit('tileset-ready', { origin: obj, tileset: earth.sceneTree.$refs[obj.ref].czmObject })
+              }
+            })
+          }
         })
         emit('earth-ready', { XE, earth, sceneTree: earth.sceneTree })
       })

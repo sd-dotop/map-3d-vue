@@ -37,36 +37,7 @@ loadJS(cesiumUrl, () => {
         let { earth } = earthUI
         //   earth.interaction.picking.enabled = true
         earth.sceneTree.root = {
-          children: [
-            {
-              expand: true,
-              title: '地图',
-              children: [
-                {
-                  czmObject: {
-                    name: '默认离线影像',
-                    xbsjType: 'Imagery',
-                    xbsjImageryProvider: {
-                      XbsjImageryProvider: {
-                        url: '//t6.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=835402675b4eef1d10ff69553d33801f',
-                      },
-                    },
-                  },
-                },
-                {
-                  czmObject: {
-                    name: '默认离线影像',
-                    xbsjType: 'Imagery',
-                    xbsjImageryProvider: {
-                      XbsjImageryProvider: {
-                        url: '//t6.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=835402675b4eef1d10ff69553d33801f',
-                      },
-                    },
-                  },
-                },
-              ],
-            },
-          ],
+          children: [],
         }
         props.objs.forEach((obj) => {
           earth.sceneTree.root.children.push(obj)

@@ -65,6 +65,34 @@ app.use(earth)
 <script setup>
     const objs = [
         {
+            expand: true,
+            title: '地图',
+            children: [
+            {
+                czmObject: {
+                name: '默认离线影像',
+                xbsjType: 'Imagery',
+                xbsjImageryProvider: {
+                    XbsjImageryProvider: {
+                    url: '//t6.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=81a16678c200ad51f8378bee6fd598b7',
+                    },
+                },
+                },
+            },
+            {
+                czmObject: {
+                name: '默认离线影像',
+                xbsjType: 'Imagery',
+                xbsjImageryProvider: {
+                    XbsjImageryProvider: {
+                    url: '//t6.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=81a16678c200ad51f8378bee6fd598b7',
+                    },
+                },
+                },
+            },
+            ],
+        },
+        {
             czmObject: {
                 name: '三维瓦片数据', // 可以不填写
                 xbsjType: 'Tileset', // 必填项
